@@ -1,0 +1,14 @@
+name: infc
+channels:
+- defaults
+- conda-forge
+- bioconda 
+dependencies:
+- perl
+- cutadapt
+- cd-hit
+- bowtie2
+- python=3.6
+- pip
+- pip:
+- pyjokes
