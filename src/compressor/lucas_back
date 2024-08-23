@@ -1,0 +1,80 @@
+#!/bin/bash 
+#$ -N compress 
+#$ -o /scratch/oscar_uaem/main/output_compressor
+#$ -e /scratch/oscar_uaem/main/output_compressor
+#$ -pe thread 4 
+
+## this is to run the command
+## qsub eza.sh 0.94 0.958 200 50 polio polio2.fasta
+
+### $1 identity percent
+### $2 coverage percent
+### $3 kmer lenght of reference to compress
+### $4 kmer jump of reference to compress
+### $5 work folder
+### $6 .fasta file where the database is
+### $7 number of sequences to analyze *2 , of 1000, its 500 sequences 
+
+#### this script is the simplified version which works with absolute paths to compress the whole database 
+##### also the compression ratio should be calculated from the original database, which is preprocessed early with an external cdhit 
+##### set a good ammount of ram so cdhit dont finish badly
+
+#set up static folder variables
+
+#./lucas_compressor.sh 0.94 0.958 200 50 Coronavirus_HKU15.meta Coronavirus_HKU15.meta 99999
+#./lucas_compressor.sh 0.94 0.958 200 50 Sapphire_II_virus.meta Sapphire_II_virus.meta 99999
+#./lucas_compressor.sh 0.94 0.958 200 50 Cowpox_virus.meta Cowpox_virus.meta 99999
+
+#qsub -R y -l h_rt=23:59:59 -t 1-2 filters.sh /scratch/oscar_uaem/main/no_version/meta.list /scratch/oscar_uaem/main/no_version/
+#FILE=$(cat $1 | head -n $SGE_TASK_ID| tail -1)
+
+#qsub -R y -l h_rt=23:59:59 -t 1-2 lucas_compressor.sh 0.94 0.958 200 50 none none 99999 /scratch/oscar_uaem/main/no_version/meta_sequence_filter_subset.list
+
+source $HOME/.bashrc
+
+FILE=$(cat $8 | head -n $SGE_TASK_ID| tail -1)
+$5=$FILE
+$6=$FILE
+
+MAIN=/scratch/oscar_uaem/main/no_version/ #main folder
+SC=${MAIN}/mew/ #here are al the used to work scripts
+IN_FOLDER=${MAIN}/meta_sequence_filter_subset/ #input folder
+OUT_FOLDER=${MAIN}/meta_sequence_lucassed/ #output folder
+FOLDER=${OUT_FOLDER}/$5/ #this will be changed for the id of the job array to give name
+DB=${IN_FOLDER}/$6 #access to the .meta fatabase
+
+#creation of current result folder
+mkdir ${FOLDER} 
+
+module load programs/bowtie2-2.3.4.3
+module load programs/samtools-1.10
+
+
+${SC}/enumerate.sh $DB ${FOLDER}/database.fasta $7  #last argument is the number of sequences
+
+perl $SC/kmer.pl  $3 $4 ${FOLDER}/database.fasta ${FOLDER}/kmers_w
+
+#echo "end of making kmers"
+
+$SC/remove.sh ${FOLDER}/kmers_w.fasta ${FOLDER}/kmers_clean.fasta
+
+
+DATA=kmers_clean.fasta
+
+module load programs/cdhit-4.8.1 
+
+cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2 
+
+grep "*" ${FOLDER}/result.clstr | cut -d">" -f2 | cut -d"." -f1  | sort -V > ${FOLDER}/unique.list ## this will output the list of headers 
+
+perl ${SC}/uniques_entanglement.pl ${FOLDER}/ $3 $4 
+#
+perl ${SC}/uniques_concatenation.pl ${FOLDER}/
+#
+
+#calculate statistics
+A=$(perl $SC/counter.pl $FOLDER/database.fasta)
+B=$(perl $SC/counter.pl $FOLDER/database.compressed)
+echo $A > ${FOLDER}/andy
+echo $B >> ${FOLDER}/andy
+perl ${SC}/divider.pl $A $B >> ${FOLDER}/andy
