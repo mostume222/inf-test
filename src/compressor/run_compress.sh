@@ -31,7 +31,7 @@ cutadapt --max-n 0 -o ${FOLDER}/kmers_clean.fasta ${FOLDER}/kmers_w.fasta
 
 ## make cd-hit compression
 DATA=kmers_clean.fasta
-cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2
+#cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2
 
 ## create the unique list
 grep "*" ${FOLDER}/result.clstr | cut -d">" -f2 | cut -d"." -f1  | sort -V > ${FOLDER}/unique.list
@@ -62,9 +62,16 @@ sed -i '/--/d' ${FOLDER}/${NAM}.d
 
 ## split the pangenome into folders 
 mkdir ${FOLDER}/pangenome_unique
+grep ">" ${FOLDER}/${NAM}.u | cut -d "/" -f 5 | sort -n | uniq > ${FOLDER}/class.list
 
-
-
+## loop in file 
+CF=${FOLDER}/class.list
+U_FOLDER=/${FOLDER}/pangenome_unique
+while CLASS= read -r line
+do
+  #echo "$line"
+  grep ${line} -A1 --no-group-separator ${FOLDER}/${NAM}.u > ${U_FOLDER}/${NAM}_${line}.u
+done < "$CF"
 
 ## reports 
 A=$(perl $SC/counter.pl $FOLDER/database.fasta)
