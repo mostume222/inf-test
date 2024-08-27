@@ -60,6 +60,9 @@ grep -A1 "/d/" ${FOLDER}/${NAM}.pan > ${FOLDER}/${SP}/${NAM}.d
 sed -i '/--/d' ${FOLDER}/${NAM}.u
 sed -i '/--/d' ${FOLDER}/${NAM}.d
 
+## split the pangenome into folders 
+mkdir ${FOLDER}/pangenome_unique
+
 
 
 
