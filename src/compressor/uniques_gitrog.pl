@@ -138,7 +138,7 @@ while (<$unique>) {
 
 			#print this line in and enfline, to actually extract the sequences
 			#also, we need to remove this unique clusters from the clusters list 
-			say "bive: ".$current_genome."_".$initial_kmer." ".$current_kmer;;	
+			#say "bive: ".$current_genome."_".$initial_kmer." ".$current_kmer;;	
 			
 			
 			## determine the positions infile
@@ -146,7 +146,7 @@ while (<$unique>) {
 			## this is actually the lenght of the region
 			## somehow called end_pos
 			my $end_pos = (($current_kmer-$initial_kmer)*$jump) + $kmer_l;
-			say "to  : ".$current_genome." ".$init_pos." ".$end_pos;
+			#		say "to  : ".$current_genome." ".$init_pos." ".$end_pos;
 
 			#define the correct taxid depending on the number of elements in the cluster 
 ######### uncomment thi modification
@@ -212,10 +212,10 @@ while (<$unique>) {
 $taxid = $hash_taxid{$current_genome};
 #define the correct taxid depending on the number of elements in the cluster 
 if ($current_kmer_depth eq "dispensable") { $taxid = $taxid_group; }
-			say "bive: ".$current_genome."_".$initial_kmer." ".$current_kmer;;
+#say "bive: ".$current_genome."_".$initial_kmer." ".$current_kmer;;
 			my $init_pos = $initial_kmer*$jump;
 			my $end_pos = (($current_kmer-$initial_kmer)*$jump) + $kmer_l;
-			say "to  : ".$current_genome." ".$init_pos." ".$end_pos;
+			#			say "to  : ".$current_genome." ".$init_pos." ".$end_pos;
 			print $end_point $current_genome.",".$initial_kmer."-".$current_kmer.",".$init_pos.",".$end_pos.",".
 					$elements_in_concatenation.",".$elements_in_cluster.",".$taxid."\n";
 print($taxid_group."\n");
