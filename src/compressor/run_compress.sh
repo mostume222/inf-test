@@ -47,6 +47,21 @@ perl ${SC}/uniques_gitrog.pl ${FOLDER}/ $3 $4
 perl ${SC}/uniques_concatenation.pl ${FOLDER}/
 echo "end of concatenation pipeline\n"
 
+## make the pangenome file using modify_headers script
+NAM=${FILE}
+perl ${SC}/modify_headers.pl ${FOLDER}/acce.list ${FOLDER}/database.compressed ${FOLDER}/${NAM}.pan ${FOLDER} ${FOLDER}/../../data/acc_variants.list ${FOLDER}/../../data/sci_names.dmp ${FILE}
+
+
+## split the pangenome file into .u and .d file 
+SEG=${FILE}
+echo ${SEG}
+grep -A1 "/u/" ${FOLDER}/${NAM}.pan > ${FOLDER}/${NAM}.u
+grep -A1 "/d/" ${FOLDER}/${NAM}.pan > ${FOLDER}/${SP}/${NAM}.d
+sed -i '/--/d' ${FOLDER}/${NAM}.u
+sed -i '/--/d' ${FOLDER}/${NAM}.d
+
+
+
 
 ## reports 
 A=$(perl $SC/counter.pl $FOLDER/database.fasta)
