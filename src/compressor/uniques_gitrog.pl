@@ -106,7 +106,7 @@ while (<$unique>) {
 ###### comment the modficiation avobe
 
 
-	print("current genome kmer ".$genome." ".$kmer."\n");
+	#	print("current genome kmer ".$genome." ".$kmer."\n");
 
 	if ($it == 0) {
 		$current_genome = $genome;	
