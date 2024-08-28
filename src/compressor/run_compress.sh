@@ -1,9 +1,9 @@
 source $HOME/.bashrc
 
 ### this to run this script
-## bash run_compress.sh 0.94 0.958 200 50 100000 1,.comp
 
-## this should be 6
+## bash run_compress.sh 0.94 0.958 200 50 100000 1,.comp
+## bash run_compress.sh 0.94 0.958 200 50 100000 input.fasta
 FILE=$6
 echo ${FILE}
 
@@ -49,7 +49,7 @@ echo "end of concatenation pipeline\n"
 
 ## make the pangenome file using modify_headers script
 NAM=${FILE}
-perl ${SC}/modify_headers.pl ${FOLDER}/acce.list ${FOLDER}/database.compressed ${FOLDER}/${NAM}.pan ${FOLDER} ${FOLDER}/../../data/acc_variants.list ${FOLDER}/../../data/sci_names.dmp ${FILE}
+perl ${SC}/modify_headers.pl ${FOLDER}/acce.list ${FOLDER}/database.compressed ${FOLDER}/${NAM}.pan ${FOLDER} ${FOLDER}/../../data/acc_variants.list ${FOLDER}/../../data/sci_names.dmp # ${FILE} #to remove the need for segment 
 
 
 ## split the pangenome file into .u and .d file 

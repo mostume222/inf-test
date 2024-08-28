@@ -9,14 +9,16 @@ open(my $compressed, "<", $ARGV[1]);
 open(my $pangenome, ">", $ARGV[2]);
 open(my $variants_fh,"<",$ARGV[4]);
 open(my $names_fh,"<",$ARGV[5]);
-my $segment = $ARGV[6];
+# my $segment = $ARGV[6];
 my $spe = $ARGV[3];
 
 ## obtain the segment
-my @a = split(",", $segment);
-#my @b = split("_", $a[0]);
-my $segu = $a[0];
-print "segment >>>".$segment."\n";
+my $segu = "";
+# my @a = split(",", $segment);
+# my @b = split("_", $a[0]);
+# my $segu = $a[0];
+# print "segment >>>".$segment."\n";
+
 
 ## hash accession numbers
 my $counter = 0;
@@ -90,7 +92,7 @@ while(<$compressed>) {
 		#print $pangenome ">".$acc_hash{$acc_id}."/".$init."/".$end."/".$dep."/".$variants{$accode}."-".$kmer_id."/".
 		#									$acc_hash{$acc_id}."-".$kmer_id."\n";
 		# this is the new report
-		print $pangenome ">".$acc_hash{$acc_id}."/".$init."/".$end."/".$dep."/".$variants{$accode}."/".$kmer_profile."/".$names{$variants{$accode}}."/".$segu."\n";
+		print $pangenome ">".$acc_hash{$acc_id}."/".$init."/".$end."/".$dep."/".$variants{$accode}."/".$kmer_profile."/".$names{$variants{$accode}}." ".$segu."\n";
 
 	} else {
 		## this is not header 
