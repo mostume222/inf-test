@@ -9,7 +9,8 @@ open(my $output_names, ">", $ARGV[4]);
 open(my $output_classes, ">", $ARGV[5]);
 
 ## run this script by 
-## perl merge.pl sequences.fasta classes.dmp names.dmp output.fasta acc_variants.list sci_names.dmp
+#perl merge.pl sequences.fasta classes.dmp names.dmp output.fasta sci_names.dmp acc_variants.list
+
 
 
 ## make the hash and also print
