@@ -32,7 +32,7 @@ PanGen works with 3 inputs:
 
 Input_file: this is a fasta file, the header of this file must contain ONLY the "accession_id" of the given sequences.
 
-Classes_file: this is a tab-separated column text file, first column has to be "accession_id" and second column "class_id", we recommend using taxids as "class_id" but any numerical input can be used. This file seves as a supervised pre-asigned template for classes of each one of the sequences in the Input_file. The generation of unique pieces in the pangenome generation is guided by this class file.
+Classes_file: this is a tab-separated column text file, first column has to be "accession_id" and second column "class_id", we recommend using taxids as "class_id" but any numerical input can be used. This file serves as a supervised pre-asigned template for classes of each one of the sequences in the Input_file. The generation of unique pieces in the pangenome generation is guided by this class file.
 
 Names_file: this is a tab-separated column text file, first column has to be "class_id" and second column is "class_name", class_name must not contain "/" characters. This file is used to generate the final Pangenome fasta file with recognizable class names. 
 
