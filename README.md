@@ -36,7 +36,7 @@ Classes_file: this is a tab-separated column text file, first column has to be "
 
 Names_file: this is a tab-separated column text file, first column has to be "class_id" and second column is "class_name", class_name must not contain "/" characters. This file is used to generate the final Pangenome fasta file with recognizable class names. 
 
-You can see and use examples of all three inputs in /sample_input/.
+You can see and use examples of all three inputs in [/sample_input/](https://github.com/mostume222/inf-test/tree/master/sample_input) 
 
 Once you have the listed 3 input files you MUST put them in the [](/input/ folder).
 
