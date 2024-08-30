@@ -8,7 +8,9 @@ If you wish to run PanGen in your linux local machine without a notebook, please
 
 Install the conda environment in [/inf-test/env/infa.yml ](https://github.com/mostume222/inf-test/blob/master/env/infa.yml) using the following command:
 
-
+'''
+conda env create -f env/infa.yml --quiet
+'''
 
 If you would like to install the dependencies on your own, the important ones are:
 
