@@ -57,5 +57,11 @@ chdmod +x /scr/run_compress.sh
 ./src/run_compress.sh 0.94 0.958 200 50 100000 {input_file}
 ```
 
-Your results can be found in the /output/input_file/ folder
+Your results can be found in the [/output/{your_input_file_name}/](https://github.com/mostume222/inf-test/tree/master/output) folder.
+
+rp: contains general statistics about the PanGenome generation procedure.
+
+pangenome.pan: contains the resulted pangenome with unique and dispensable pieces.
+
+/pangenome_unique/ folder: contains a pangenome file for each class with only its unique pangenome pieces.
 
