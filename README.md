@@ -4,7 +4,7 @@ You can run this software in your local machine by following the instructions in
 
 If you wish to run PanGen in your linux local machine without a notebook, please follow the instructions bellow:
 
-# Install dependencies
+# Step 1. Install dependencies
 
 Install the conda environment in [/inf-test/env/infa.yml ](https://github.com/mostume222/inf-test/blob/master/env/infa.yml) using the following command:
 
@@ -25,3 +25,10 @@ python 3.6.13
 perl 5.34.0
 
 pip 21.2.2
+
+# Step 2. Input 
+
+```
+perl /src/merge.pl /input/{input_file} /input/{classes_file} /input/names_file /sequences/{input_file}  /data/sci_names.dmp /data/acc_variants.list
+
+```
