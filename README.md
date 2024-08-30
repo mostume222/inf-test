@@ -15,13 +15,8 @@ conda env create -f /env/infa.yml --quiet
 If you would like to install the dependencies on your own without the need of using a conda environment, thesse are the core dependencies to make the scripts work:
 
 cd-hit 4.8.1
-
 bowtie2 2.5.4
-
 cutadapt 3.5
-
 python 3.6.13
-
 perl 5.34.0
-
 pip 21.2.2
