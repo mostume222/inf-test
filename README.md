@@ -6,7 +6,7 @@ We recomend ALWAYS running PanGen using a jupyter notebook but if you wish to ru
 
 # Step 1. Install dependencies
 
-Install the conda environment in [/inf-test/env/infa.yml ](https://github.com/mostume222/inf-test/blob/master/env/infa.yml) using the following command:
+Install the conda environment in [/inf-test/env/infa.yml ](/env/infa.yml) using the following command:
 
 ```
 conda env create -f /env/infa.yml --quiet
@@ -36,9 +36,9 @@ Classes_file: this is a tab-separated column text file, first column has to be "
 
 Names_file: this is a tab-separated column text file, first column has to be "class_id" and second column is "class_name", class_name must not contain "/" characters. This file is used to generate the final Pangenome fasta file with recognizable class names. 
 
-You can see and use examples of all three inputs in https://github.com/mostume222/inf-test/tree/master/sample_input/.
+You can see and use examples of all three inputs in /sample_input/.
 
-Once you have the listed 3 input files you MUST put them in the https://github.com/mostume222/inf-test/tree/master/input/ folder.
+Once you have the listed 3 input files you MUST put them in the [](/input/ folder).
 
 Then, run the following code:
 
