@@ -37,7 +37,7 @@ Names_file: this is a tab-separated column text file, first column has to be "cl
 
 You can see and use examples of all three inputs in https://github.com/mostume222/inf-test/tree/master/sample_input/.
 
-Once you have the listed 3 input files you MUST put them in the 
+Once you have the listed 3 input files you MUST put them in the https://github.com/mostume222/inf-test/tree/master/input/ foler
 
 # Step 3. Run PanGen and find your results
 
