@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 
+print("started merge program \n");
 open(my $fasta, "<", $ARGV[0]);
 open(my $classes, "<", $ARGV[1]);
 open(my $names, "<", $ARGV[2]);
