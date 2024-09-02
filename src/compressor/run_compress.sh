@@ -4,13 +4,15 @@ source $HOME/.bashrc
 
 ## bash run_compress.sh 0.94 0.958 200 50 100000 1,.comp
 ## bash run_compress.sh 0.94 0.958 200 50 100000 input.fasta
+## bash run_compress.sh 0.94 0.958 200 50 100000 testsample
 FILE=$6
 echo ${FILE}
 
 MAIN=$(pwd)/../../
 SC=${MAIN}/src/compressor/
 IN_FOLDER=${MAIN}/sequences/
-OUT_FOLDER=${MAIN}/output_compression
+OUT_FOLDER=${MAIN}/output_compression/
+REL_FOLDER=${MAIN}/output/
 FOLDER=${OUT_FOLDER}/${FILE}/
 DB=${IN_FOLDER}/${FILE}
 
@@ -31,7 +33,7 @@ cutadapt --max-n 0 -o ${FOLDER}/kmers_clean.fasta ${FOLDER}/kmers_w.fasta
 
 ## make cd-hit compression
 DATA=kmers_clean.fasta
-cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2
+#cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2
 
 ## create the unique list
 grep "*" ${FOLDER}/result.clstr | cut -d">" -f2 | cut -d"." -f1  | sort -V > ${FOLDER}/unique.list
@@ -70,17 +72,22 @@ U_FOLDER=/${FOLDER}/pangenome_unique
 while CLASS= read -r line
 do
   #echo "$line"
-  grep ${line} -A1 --no-group-separator ${FOLDER}/${NAM}.u > ${U_FOLDER}/${NAM}_${line}.u
+  grep ${line} -A1 --no-group-separator ${FOLDER}/${NAM}.u > ${U_FOLDER}/${NAM}_${line}_unique.fasta
 done < "$CF"
 
 ## reports 
 A=$(perl $SC/counter.pl $FOLDER/database.fasta)
 B=$(perl $SC/counter.pl $FOLDER/database.compressed)
-echo ${FILE} >> ${FOLDER}/andy
-echo $A >> ${FOLDER}/andy
-echo $B >> ${FOLDER}/andy
-perl ${SC}/divider.pl $A $B >> ${FOLDER}/andy
-grep -c ">" ${FOLDER}/database.fasta >> ${FOLDER}/andy
+> ${FOLDER}/andy
+echo filename			: ${FILE} >> ${FOLDER}/andy
+echo nucleotide before comp	: $A >> ${FOLDER}/andy
+echo nucleotide after comp	: $B >> ${FOLDER}/andy
+P=$(perl ${SC}/divider.pl $A $B)
+#perl ${SC}/divider.pl $A $B >> ${FOLDER}/andy
+printf "compression		: %.6f\n" "$P" >> ${FOLDER}/andy
+C=$(grep -c ">" ${FOLDER}/database.fasta)
+#grep -c ">" ${FOLDER}/database.fasta >> ${FOLDER}/andy
+echo initial sequences count	: ${C} >> ${FOLDER}/andy
 
 ## checar bien esta parte con el reporte actual
 ## porque no se si es corecto
@@ -92,6 +99,14 @@ sed -i 's/[_.]metalf//g' ${FOLDER}/andy
 tr '\n' ' ' < ${FOLDER}/andy > ${FOLDER}/rp
 echo '' >> ${FOLDER}/rp
 
+## rename report file 
+cp ${FOLDER}/andy ${FOLDER}/${NAM}.report
+
+## move final files 
+O_FOLDER=${REL_FOLDER}/${NAM}
+mkdir $O_FOLDER
+mv ${FOLDER}/${NAM}.*  ${O_FOLDER}/
+mv -r ${FOLDER}/pangenome_unique ${O_FOLDER}/
 
 
 
