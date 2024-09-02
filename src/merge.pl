@@ -31,8 +31,8 @@ while(<$names>) {
 }
 
 
-#while(<$fasta>) {
-while(0) { 
+while(<$fasta>) {
+#while(0) { 
 	chomp($_);
 	if ($_ =~ />/) {
 		my @line = split(">", $_);
