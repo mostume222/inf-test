@@ -29,9 +29,10 @@ while(<$names>) {
 	my @line = split("\t",$_);
 	print $output_names $line[0].">".$line[1]."\n";
 }
+print("finished in the names file \n");
 
 
-while(<$fasta>) {
+while(0) {
 	chomp($_);
 	if ($_ =~ />/) {
 		my @line = split(">", $_);
