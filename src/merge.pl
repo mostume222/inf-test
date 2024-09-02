@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 
-print("started merge program \n");
 open(my $fasta, "<", $ARGV[0]);
 open(my $classes, "<", $ARGV[1]);
 open(my $names, "<", $ARGV[2]);
@@ -23,7 +22,6 @@ while(<$classes>) {
 	$hash_classes{$line[0]} = $line[1];
 	print $output_classes $line[0].",".$line[1]."\n";
 }
-print("finished hashing classes file\n");
 
 ## make the correct output for sci names file 
 while(<$names>) {
@@ -31,11 +29,9 @@ while(<$names>) {
 	my @line = split("\t",$_);
 	print $output_names $line[0].">".$line[1]."\n";
 }
-print("finished hashing names dile\n");
 
 
-while(0){
-#while(<$fasta>) {
+while(<$fasta>) {
 	chomp($_);
 	if ($_ =~ />/) {
 		my @line = split(">", $_);
