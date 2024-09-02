@@ -33,7 +33,7 @@ cutadapt --max-n 0 -o ${FOLDER}/kmers_clean.fasta ${FOLDER}/kmers_w.fasta
 
 ## make cd-hit compression
 DATA=kmers_clean.fasta
-#cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2
+cd-hit -i ${FOLDER}/${DATA} -o ${FOLDER}/result -c $1 -n 5 -M 8000 -T 8 -G 1 -g 1 -sc 1 -aS $2
 
 ## create the unique list
 grep "*" ${FOLDER}/result.clstr | cut -d">" -f2 | cut -d"." -f1  | sort -V > ${FOLDER}/unique.list
