@@ -106,7 +106,7 @@ cp ${FOLDER}/andy ${FOLDER}/${NAM}.report
 O_FOLDER=${REL_FOLDER}/${NAM}
 mkdir $O_FOLDER
 mv ${FOLDER}/${NAM}.*  ${O_FOLDER}/
-mv -r ${FOLDER}/pangenome_unique ${O_FOLDER}/
+cp -r ${FOLDER}/pangenome_unique ${O_FOLDER}/
 
 
 
