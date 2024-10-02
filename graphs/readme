@@ -1,0 +1,15 @@
+this folder is to set up the heatmaps graphs in the
+related paper
+
+inputs of each one of them are labeled as followed:
+
+X.res : contains the heatmap matrix 
+X.host : contains the existing host (and x axis) in the heatmap in order
+Y.subtype : contains the existing subtypes (and y axis) in the heatmap in order
+
+
+
+1.data     2.host     3.res      4.subtype  6.data     7.host     8.res
+1.host     2.res      3.subtype  5.data     6.host     7.res      8.subtype
+1.res      2.subtype  4.data     5.host     6.res      7.subtype
+
