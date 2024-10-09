@@ -43,7 +43,7 @@ Once you have the listed 3 input files you MUST put them in the [/input/](https:
 Then, run the following code:
 
 ```
-perl /src/merge.pl /input/{input_file} /input/{classes_file} /input/{names_file} /sequences/{input_file}  /data/sci_names.dmp /data/acc_variants.list
+perl src/merge.pl input/{input_file} input/{classes_file} input/{names_file} sequences/{input_file}  data/sci_names.dmp data/acc_variants.list
 ```
 
 The former code will create all the neded files to run the compression program.
@@ -53,8 +53,9 @@ The former code will create all the neded files to run the compression program.
 To run the main script and generate pangenomes use:
 
 ```
-chdmod +x /scr/run_compress.sh
-./src/run_compress.sh 0.94 0.958 200 50 100000 {input_file}
+cd src/compressor/
+chdmod +x run_compress.sh
+./run_compress.sh 0.94 0.958 200 50 100000 {input_file}
 ```
 
 Your results can be found in the [/output/{your_input_file_name}/](https://github.com/mostume222/inf-test/tree/master/output) folder.
