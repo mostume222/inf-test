@@ -25,7 +25,6 @@ while(<$ram>) {
 	$sequences{$line[1]} = $seq;
 	$counter ++;
 }
-print("finishing the hashing of the databases".$counter."\n");
 
 
 #say Dumper(\%sequences);
@@ -45,7 +44,6 @@ while(<$un>) {
 	print $obj ">".join("_",@line)."\n".$sequence."\n";
 }
 
-say "end of the concatenation script";
 
 
 

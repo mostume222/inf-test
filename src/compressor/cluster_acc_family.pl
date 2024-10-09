@@ -11,7 +11,6 @@ while(<$acc>){
 	my @line = split(">", $_);	
 	$accs{$line[0]} = $line[1];
 }
-print("finished accessions and number\n");
 
 my %variants;
 my %segments;
@@ -21,10 +20,6 @@ while(<$variants_fh>){
     $variants{$line[0]} = $line[1]; ## this is two in the experiment that has segments
 	#$segments{$line[0]} = $line[1];  ## this is one in the all experiment because the file is diferent
 }
-
-print("finished accessions and variants\n");
-
-print($variants{"MG779875"}."\n");
 
 
 my $counter = 0;
@@ -124,5 +119,3 @@ if ($uniq == 1) {
 	print $output $leader_taxid.":".$elements.":0";
 }
 
-
-print("finished making coors file\n");

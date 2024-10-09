@@ -22,9 +22,6 @@ while(my $sev = <$cdhit>) {
 		
 	$counter ++;
 }
-print("finish hashing the cdhit output".$counter."\n");
-print(" lenght of the order array ".scalar(@kmers_order)."\n");
-
 
 ## walking the list of kmers_order
 my $in=0;
@@ -49,7 +46,6 @@ for my $var (@kmers_order) {
 	print $output $current_kmer." ".$num_elements."\n";
 	$in ++;	
 }
-print("finished walking the kmers_order ".$in."\n");
 
 
 

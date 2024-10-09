@@ -49,6 +49,7 @@ while (<$fh>) {
 		$current_genome = $next_genome;
 		$next_genome = $current_genome + 1;	
 	} else {
+		chomp($_);
 		my $seq_len = length $_;
 		my $max_kmer = int((($seq_len - $k) / $s)+1);
 

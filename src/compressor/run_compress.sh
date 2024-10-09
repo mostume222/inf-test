@@ -6,7 +6,7 @@ source $HOME/.bashrc
 ## bash run_compress.sh 0.94 0.958 200 50 100000 input.fasta
 ## bash run_compress.sh 0.94 0.958 200 50 100000 testsample
 FILE=$6
-echo ${FILE}
+#echo ${FILE}
 
 MAIN=$(pwd)/../../
 SC=${MAIN}/src/compressor/
@@ -20,6 +20,7 @@ DB=${IN_FOLDER}/${FILE}
 mkdir $FOLDER
 
 ## enumerate fasta files
+#echo ${DB}
 perl ${SC}/enumerate.pl $DB ${FOLDER}/database.fasta
 
 ## make taxid hashfile
@@ -47,7 +48,6 @@ perl ${SC}/cluster_element_counter.pl ${FOLDER}/domain.list ${FOLDER}/cluster_si
 
 perl ${SC}/uniques_gitrog.pl ${FOLDER}/ $3 $4
 perl ${SC}/uniques_concatenation.pl ${FOLDER}/
-echo "end of concatenation pipeline\n"
 
 ## make the pangenome file using modify_headers script
 NAM=${FILE}
@@ -56,7 +56,7 @@ perl ${SC}/modify_headers.pl ${FOLDER}/acce.list ${FOLDER}/database.compressed $
 
 ## split the pangenome file into .u and .d file 
 SEG=${FILE}
-echo ${SEG}
+#echo ${SEG}
 grep -A1 "/u/" ${FOLDER}/${NAM}.pan > ${FOLDER}/${NAM}.u
 grep -A1 "/d/" ${FOLDER}/${NAM}.pan > ${FOLDER}/${SP}/${NAM}.d
 sed -i '/--/d' ${FOLDER}/${NAM}.u
@@ -72,22 +72,30 @@ U_FOLDER=/${FOLDER}/pangenome_unique
 while CLASS= read -r line
 do
   #echo "$line"
-  grep ${line} -A1 --no-group-separator ${FOLDER}/${NAM}.u > ${U_FOLDER}/${NAM}_${line}_unique.fasta
+  grep ${line} -A1 --no-group-separator ${FOLDER}/${NAM}.u > ${U_FOLDER}/${line}_unique.fasta
+  ## remove 0s
+  LIN=$(wc -l ${U_FOLDER}/${line}_unique.fasta | cut -d " " -f 1)
+#    echo $LIN
+    if [ "$LIN" -eq 0 ]; then
+        rm ${U_FOLDER}/${line}_unique.fasta
+    fi
 done < "$CF"
 
 ## reports 
 A=$(perl $SC/counter.pl $FOLDER/database.fasta)
 B=$(perl $SC/counter.pl $FOLDER/database.compressed)
 > ${FOLDER}/andy
-echo filename			: ${FILE} >> ${FOLDER}/andy
-echo nucleotide before comp	: $A >> ${FOLDER}/andy
-echo nucleotide after comp	: $B >> ${FOLDER}/andy
+echo "***** 	compression finished	*****"
+echo "***** 	processing report 	*****"
+echo filename				: ${FILE} >> ${FOLDER}/andy
+echo nucleotide before compression	: $A >> ${FOLDER}/andy
+echo nucleotide after comppression	: $B >> ${FOLDER}/andy
 P=$(perl ${SC}/divider.pl $A $B)
 #perl ${SC}/divider.pl $A $B >> ${FOLDER}/andy
-printf "compression		: %.6f\n" "$P" >> ${FOLDER}/andy
+printf "compression ratio		: %.6f\n" "$P" >> ${FOLDER}/andy
 C=$(grep -c ">" ${FOLDER}/database.fasta)
 #grep -c ">" ${FOLDER}/database.fasta >> ${FOLDER}/andy
-echo initial sequences count	: ${C} >> ${FOLDER}/andy
+echo initial sequences count		: ${C} >> ${FOLDER}/andy
 
 ## checar bien esta parte con el reporte actual
 ## porque no se si es corecto
@@ -107,6 +115,7 @@ O_FOLDER=${REL_FOLDER}/${NAM}
 mkdir $O_FOLDER
 mv ${FOLDER}/${NAM}.*  ${O_FOLDER}/
 cp -r ${FOLDER}/pangenome_unique ${O_FOLDER}/
+cat ${O_FOLDER}/${NAM}.report
 
 
 

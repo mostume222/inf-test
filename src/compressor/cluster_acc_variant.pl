@@ -11,7 +11,6 @@ while(<$acc>){
 	my @line = split(">", $_);	
 	$accs{$line[0]} = $line[1];
 }
-print("finished accessions and number\n");
 
 my %variants;
 while(<$variants_fh>){
@@ -19,7 +18,6 @@ while(<$variants_fh>){
     my @line = split(",", $_);
     $variants{$line[0]} = $line[1];
 }
-print("finished accessions and variants\n");
 
 
 my $counter = 0;
@@ -70,4 +68,3 @@ while(<$coor>){
 	$counter_in = $counter_in + 1;
 	
 }
-print("finished making coors file\n");

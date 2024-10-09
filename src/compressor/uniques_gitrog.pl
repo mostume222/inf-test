@@ -27,7 +27,6 @@ while(<$coorsfh>) {
 	my @line = split(":", $_);	
 	$coors{$line[0]} = $line[1];	
 }
-print("finish hashing the coors file");
 
 
 #my @onehits = <$unique>;
@@ -43,7 +42,6 @@ while(my $sev = <$cluster_size>) {
 	$hash_cluster_size{$kamer} = $cout;
 	$counter ++;
 }
-print("finish hashing the cluste sizes".$counter."\n");
 
 
 $counter = 0;
@@ -56,7 +54,6 @@ while(my $ring = <$taxid_num>) {
 	$hash_taxid{$num} = $tax;
 	$counter ++;	
 }
-print("finished hashing the taxids of each genome".$counter."\n");
 
 ### get the taxid of the gruoup
 my $taxid_group = $folder;
@@ -218,6 +215,4 @@ if ($current_kmer_depth eq "dispensable") { $taxid = $taxid_group; }
 			#			say "to  : ".$current_genome." ".$init_pos." ".$end_pos;
 			print $end_point $current_genome.",".$initial_kmer."-".$current_kmer.",".$init_pos.",".$end_pos.",".
 					$elements_in_concatenation.",".$elements_in_cluster.",".$taxid."\n";
-print($taxid_group."\n");
 ### the last kmer in the unique.list file 
-print("gitrog fed\n");

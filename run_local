@@ -1,0 +1,5 @@
+
+perl src/merge.pl input/testsample.fasta input/classes.dmp input/names.dmp sequences/testsample.fasta  data/sci_names.dmp data/acc_variants.list
+
+cd src/compressor
+bash run_compress.sh 0.94 0.958 200 50 100000 testsample.fasta
